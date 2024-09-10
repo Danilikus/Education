@@ -1,7 +1,8 @@
-from django.contrib import admin
-from django.urls import path
+from django.urls import path, re_path
 from firstapp import views
-
+ 
 urlpatterns = [
-    path('', views.index, name = 'home'),
+    re_path(r'^about/contact/', views.contact),
+    re_path(r'^about', views.about),
+    path('', views.index),
 ]
