@@ -4,13 +4,27 @@ from .forms import UserForm
 
 # def index(request):
 #  if request.method == "POST":
-#     name = request.POST.get("name") # получить значения поля Имя
-#     age = request.POST.get("age") # значения поля Возраст
-#     output = "<h2>Пользователь</h2><h3>Имя - {0}, Возраст – {1}</h3>".format(name, age)
-#     return HttpResponse(output)
+#    userform = UserForm(request.POST)
+#    if userform.is_valid():
+#     name = userform.cleaned_data["name"]
+#     return HttpResponse("<h2>Имя введено коррректно – {0}</h2>".format(name))
+#    else:
+#     return HttpResponse("Ошибка ввода данных")
 #  else:
+#    userform = UserForm()
+#    return render(request, "firstapp/index.html", {"form": userform})
+
+# def index(request):
+#  userform = UserForm()
+#  return render(request, "firstapp/index.html", {"form": userform})
+
 def index(request):
  userform = UserForm()
+ if request.method == "POST":
+   userform = UserForm(request.POST)
+   if userform.is_valid():
+    name = userform.cleaned_data["name"]
+    return HttpResponse("<h2>Имя введено коррректно – {0}</h2>".format(name))
  return render(request, "firstapp/index.html", {"form": userform})
 
 
